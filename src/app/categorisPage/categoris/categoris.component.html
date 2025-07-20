@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="content_fashion">
+        <div class="carousel_content">
+            <section class="carousel">
+                <ol #viewport class="viewport" tabindex="1" (mousedown)="startDrag($event)" (mousemove)="onDrag($event)"
+                    (mouseup)="endDrag()" (mouseleave)="endDrag()">
+                    <li class="slide" *ngFor="let item of items_categoris">
+                        <div class="snapper">
+                            <a>{{ item }}</a>
+                        </div>
+                    </li>
+                </ol>
+            </section>
+        </div>
+        <div class="cards carousel_card" abindex="1" (mousedown)="startDrag($event)" (mousemove)="onDrag($event)"
+                    (mouseup)="endDrag()" (mouseleave)="endDrag()">
+            <div class="card " *ngFor="let item of items_card"  >
+                <div class="content_card ">
+                    <div class="img_content">
+                        <img src={{item.src}} alt="">
+                        <!-- <img src="../../../assets/img/header.png" alt=""> -->
+                    </div>
+                    <div class="card_meta">
+                        <div class="user">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="card_meta_right">
+                        <div class="heart">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <div class="save">
+                            <i class="fa-solid fa-bookmark"></i>
+                        </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

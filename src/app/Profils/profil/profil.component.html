@@ -1,0 +1,262 @@
+<div class="container">
+    <div class="content_profil">
+        <div class="personnel_informations">
+            <div class="title">
+                <img src={{img}} alt="">
+                <i (click)="openEditPhotoModal()" class="fa-solid fa-pen"></i>
+            </div>
+            <div class="content">
+                <div class="content_personnel_informations">
+                    <div class="informations">
+                        <div class="profil">
+                            <div class="" style="margin-top: 60px;"></div>
+                            <div class="fullname">
+                                <div class="nom">
+                                    @if(nom && prenom){
+                                    <h6>{{nom}}</h6>
+                                    }@else {
+                                    <div class="empty_content">
+                                        enter your name full name
+                                    </div>
+
+                                    }
+                                </div>
+                                                            <div class="prenom">
+                                @if(prenom ){
+                                <h6>{{prenom}}</h6>
+                                }
+                            </div>
+                            </div>
+
+                            <div class="phone">
+                                @if(phone){
+                                <h6>{{phone}}</h6>
+                                }@else {
+                                <div class="empty_content">
+                                    enter your phone number
+                                </div>
+                                }
+                            </div>
+                            <div class="email">
+                                <h6>{{email}}</h6>
+                            </div>
+                            <div class="date_naissance ">
+                                @if(date_naissance){
+                                <h6>{{date_naissance}}</h6>
+                                }@else {
+                                <div class="empty_content">
+                                    Please share your birthdate with us
+                                </div>
+                                }
+                            </div>
+                            <div class="socialMediam" style="margin-top: 3%;">
+                                <div class="insta"><i class="fa-brands fa-instagram"></i></div>
+                                <div class="fb"><i class="fa-brands fa-facebook"></i></div>
+                                <div class="tiktok"><i class="fa-brands fa-tiktok"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contents">
+            <div class="content">
+                <div class="contentInfo column">
+                    <div class="edit_profil" (click)=" openEditProfilModal()">
+                        <h3>Edit Profil <i class="fa-solid fa-pen"></i></h3>
+                    </div>
+                    <h4>About me:</h4>
+                    <div class="row">
+                        @if(description){
+                        <h6> {{description}}</h6>
+                        }@else {
+                        <div class="empty_content">
+                            Share something about yourself here
+                        </div>
+
+                        }
+                    </div>
+                    <div class="row">
+                        <h5>Adresse:</h5>
+                        @if(local){
+                        <h6>{{local}}</h6>
+                        }@else {
+                        <div class="empty_content">
+                            Share your address with us
+                        </div>
+                        }
+                    </div>
+                    <div class="row">
+                        <h5>Nationality:</h5>
+                        @if(nationality){
+                        <h6>{{nationality}}</h6>
+                        }@else {
+                        <div class="empty_content">
+                            Share your address with us
+                        </div>
+                        }
+                    </div>
+                    <div class="row">
+                        <h5>Gender:</h5>
+                        @if(nationality){
+                        <h6>{{sexe}}</h6>
+                        }@else {
+                        <div class="empty_content">
+                            Share your Gender with us
+                        </div>
+                        }
+                    </div>
+                    <div class="row">
+                        <h5>Website:</h5>
+                        @if(site){
+                        <h6> {{site}}</h6>
+                        }@else {
+                        <div class="empty_content">
+                            share with us your website: https://yourwebsite.com
+                        </div>
+                        }
+
+                    </div>
+                </div>
+                <br><br>
+            </div>
+            <div class="content">
+                <div class="fav row">
+                    <div class="left">
+                        <i class="fa-solid fa-star" (click)="favorite()"></i>
+                        <h6 (click)="favorite()">Favorite</h6>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" (click)="favorite()"></i>
+                </div>
+                <div class="historique row">
+                    <div class="left">
+                        <i class="fa-solid fa-clock-rotate-left" (click)="  history()"></i>
+                        <h6 (click)="  history()">History </h6>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" (click)="  history()"></i>
+                </div>
+                <div class="logOut row">
+                    <div class="left" (click)=" openModal()">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <h6> logOut </h6>
+                    </div>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- dialog log out -->
+<div class="modal-overlay" *ngIf="isModalOpen">
+    <div class="modal">
+        <div class="close">
+            <button type="button" (click)="closeModal()">
+                X
+            </button>
+        </div>
+        <h2>Confirm Logout</h2>
+        <p>Are you sure you want to log out?</p>
+        <div class="btns">
+            <button (click)="closeModal()">Close</button>
+            <button (click)=" logout()">Logout</button>
+        </div>
+
+
+    </div>
+</div>
+<!-- dialog log out -->
+<div class="modal-overlay" *ngIf="isModalEditPhotoOpen">
+    <div class="modal">
+        <div class="close">
+            <button type="button" (click)="closeEditPhotoModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="btns">
+            <input type="file" (change)="onFileSelected($event)" />
+            <button (click)="uploadPhoto()">Upload Photo</button>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- dialog Edit profil-->
+<div class="modal-overlay" *ngIf="isModalEditProfilOpen">
+    <div class="modal" style="height: 90vh; width:80%">
+        <div class="close" style="margin-top: 0%;">
+            <button type="button" (click)="closeEditProfilModal()">
+                X
+            </button>
+        </div>
+        <form (ngSubmit)="onSubmit()">
+            <div class="edit column">
+                <div class="row">
+                    <div class="column">
+                        <label for="nom"> First Name:</label>
+                        <input type="text" name="nom" id="nom" placeholder="First Name .." [(ngModel)]="nom" required>
+                    </div>
+                    <div class="column">
+                        <label for="prenom"> Last Name:</label>
+                        <input type="text" name="prenom" id="prenom" placeholder="Last Name .." [(ngModel)]="prenom"
+                            required>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <label for="adresse">Adresse:</label>
+                        <input type="text" name="adresse" id="adresse" placeholder="Adresse" [(ngModel)]="adresse"
+                            required>
+                    </div>
+                    <div class="column">
+                        <label for="local">Location </label>
+                        <input type="text" name="local" id="local" placeholder="Location" [(ngModel)]="local" required>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <label for="nationality">Nationality</label>
+                        <input type="text" name="nationality" id="nationality" placeholder="Nationality"
+                            [(ngModel)]="nationality" required>
+                    </div>
+                    <div class="column">
+                        <label for="date_naissance">BirthDate</label>
+                        <input type="date" name="date_naissance" id="date_naissance" placeholder="BirthDate"
+                            [(ngModel)]="date_naissance" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <label for="phone">Phone</label>
+                        <input type="tel" name="phone" id="phone" placeholder="phone" [(ngModel)]="phone" required>
+                    </div>
+                    <div class="column">
+                        <label for="facebook">Facebook</label>
+                        <input type="text" name="facebook" id="facebook" placeholder="Url facebook"
+                            [(ngModel)]="facebook" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="column">
+                        <label for="">Instagrame</label>
+                        <input type="text" name="instagramme" id="instagramme" placeholder="Url Instagrame"
+                            [(ngModel)]="instagramme" required>
+                    </div>
+                    <div class="column">
+                        <label for="tiktok">TikTok</label>
+                        <input type="text" name="tiktok" id="tiktok" placeholder="Url Tiktok" [(ngModel)]="tiktok"
+                            required>
+                    </div>
+
+                </div>
+                    <input type="text" name="tiktok" id="description" placeholder="Description .." [(ngModel)]="description" required>
+            </div>
+            <button type="submit">save</button>
+        </form>
+    </div>
+</div>

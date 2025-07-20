@@ -1,0 +1,30 @@
+import { Routes } from '@angular/router';
+import { HomeComponent } from './homePage/home/home.component';
+import { ContactComponent } from './contact/contact.component';
+import { SignupComponent } from './authentification/signup/signup.component';
+import { SigninComponent } from './authentification/signin/signin.component';
+import { HomeCategorisComponent } from './categorisPage/home-categoris/home-categoris.component';
+import { ActivateAccountComponent } from './activate-account/activate-account.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ProfilComponent } from './Profils/profil/profil.component';
+import { Token } from '@angular/compiler';
+import { SettingComponent } from './Profils/setting/setting.component';
+import { HistoriqueComponent } from './Profils/historique/historique.component';
+import { FavoriteComponent } from './Profils/favorite/favorite.component';
+import { EditProfilComponent } from './Profils/edit-profil/edit-profil.component';
+
+export const routes: Routes = [
+      { path: 'categoris', component: HomeCategorisComponent },
+      { path: 'contact', component: ContactComponent },
+      { path: 'home_p', component: HomeComponent },
+      { path: 'signUp', component: SignupComponent },
+      { path: 'login', component: SigninComponent },
+      { path: 'forgot-password', component: ForgetPasswordComponent },
+      { path: 'profil/:token', component: ProfilComponent },
+      { path: 'setting/:token', component: SettingComponent },
+      { path: 'activateAccount', component: ActivateAccountComponent },
+      { path: 'history', component: HistoriqueComponent },
+      { path: 'edit-profil', component: EditProfilComponent },
+      { path: 'favorite', component: FavoriteComponent },
+      { path: '', component: HomeCategorisComponent },
+];
