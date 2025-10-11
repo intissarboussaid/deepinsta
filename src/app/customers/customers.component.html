@@ -1,0 +1,124 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    @if(successMessage){
+    <div class="message_succes transparent">
+        <div class="succes_message">
+            {{ successMessage }}
+        </div>
+    </div>
+    }
+    @if(errorMessage){
+    <div class="message transparent">
+        <div class="error_message">
+            {{ errorMessage }}
+        </div>
+    </div>
+    }
+    <div class="content transparent">
+        @if(allCustomers.length>0){
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Total Pieces</th>
+                    <th>Loyal Customer</th>
+                    <th>Promo Code</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+
+            <tbody>
+                @for(i of allCustomers; track i){
+                <tr>
+                    <td>
+                        <div class="center column transparent">
+                            @if(i.user.photo){
+                            <img src={{i.user.photo.filePath}} alt="photo profil">
+                            }@if(i.user.nom){
+                            {{i.user.nom}}
+                            }@else {
+                            Anonyme
+                            }
+
+                        </div>
+                    </td>
+                    <td>{{i.nbre}}</td>
+                    <td>
+                        <div class="row transparent center">
+                            <label class="red checkbox column transparent"
+                                (click)="makeItNotFidele(i.id_user_customer)">
+                                <input type="checkbox" [checked]="!i.fidele" />No
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="green checkbox column  transparent"
+                                (click)="makeItFidele(i.id_user_customer)">
+                                <input type="checkbox" [checked]="i.fidele" />Yes
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+
+                    </td>
+                    <td>
+                        <div class="center transparent">
+                            @if(i.fidele){
+                                <button  (click)="openModal(i.user.id_user)">add</button>
+                            }@else {
+                                <button  (click)="NotFifele()">add</button>
+                            }
+                            
+                        </div>
+                    </td>
+                </tr>
+
+                }
+
+            </tbody>
+        </table>
+
+        }@else {
+        <div class="transparent center width100" style="height: 50vh;">
+            <div class="first_child">
+                <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="second transparent">
+                <div class="second-hild">
+                    <i class="fa-solid fa-ban transparent"></i>
+                </div>
+            </div>
+
+
+        </div>
+        }
+
+    </div>
+
+
+    <!-- modal valid -->
+    @if(isModalOpen){
+    <div class="modal-overlay  ">
+        <div class="modal" style="width: 50%;height: 30%;">
+            <div class="close" style="width:100%; margin-top: -10px;">
+                <button type="button" (click)="closeModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form (ngSubmit)="addCodePromo()">
+                <div class="row">
+                    <input type="number" name="percent" id="percent" min="0" max="100" step="0.01"
+                        [(ngModel)]="perecent" placeholder="10" required #perecentRef="ngModel">
+                    <div class="">%</div>
+                </div>
+                <button type="submit">add</button>
+
+            </form>
+
+
+        </div>
+    </div>
+    }
+</div>
+
+<app-footer></app-footer>

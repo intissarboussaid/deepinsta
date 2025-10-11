@@ -1,0 +1,16 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CodePromoService {
+
+    private apiUrl = 'http://localhost:8080/api/deepshop/codePromo/';
+  constructor(private http: HttpClient) { }
+
+  addCodePromo(idAdmin:any,idUser:any,CodePromo:any): Observable<any> {
+    return this.http.post(`${this.apiUrl}add/user/${idAdmin}/${idUser}`, CodePromo);
+  }
+}

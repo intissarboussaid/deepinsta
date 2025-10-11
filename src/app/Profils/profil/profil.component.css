@@ -29,6 +29,7 @@ p,
 h3,
 h5,
 h4,
+.upload,
 .row,
 .socialMediam,
 .insta,
@@ -42,9 +43,13 @@ i,
 .informations,
 .left,
 h6,
+a,
+span,
+.message,
 .column,
 .edit,
 label,
+.custom-file-upload,
 input,
 .modal-overlay button,
 .modal-overlay button i,
@@ -63,8 +68,17 @@ img {
     border-radius: 50%;
     width: 250px;
     height: 230px;
+    object-fit: cover;
 }
-
+.back button{
+    border: none;
+    border-radius: none;
+    font-size: 40px;
+    font-weight: 600;
+}
+.back button:hover,.back button:focus{
+    background: transparent;
+}
 .title {
     z-index: 22;
     display: flex;
@@ -213,6 +227,9 @@ h5{
 h6 {
     font-size: 20px;
 }
+p {
+    color: rgba(134, 96, 70, 0.8);
+}
 
 .fav:hover,
 .historique:hover,
@@ -244,8 +261,6 @@ h3:focus {
 .edit{
     width:100%;
     place-items: center;
-    /* place-content: center; */
-      /* overflow-y: auto; */
 }
 .edit .row,.edit .column{
     width:80%;
@@ -295,7 +310,7 @@ h3:focus {
 }
 
 .close button {
-    margin-top: -40px;
+    margin-top: 10px;
     width: 40px;
     background: transparent;
     border-radius: 50%;
@@ -336,7 +351,8 @@ input{
     border: 2px solid #7F5539;
     background: #7f553942;
 }
-button{
+.content_profil button{
+ margin-top: 20px;
   width: 150px;
   height: 50px;
   font-size: 20px;
@@ -348,9 +364,30 @@ button{
   color: #7F5539;
   font-weight: 700;
 }
-button:hover,button:focus{
+.content_profil button:hover,.content_profil button:focus{
 background: #7F5539 !important;
 color: #ffff;
+}
+form{
+    width: 100%;
+}
+#description{
+    width:100%
+}
+input[type="checkbox"]{
+   border: 2px solid #583a26;
+   border-radius: 50%;
+}
+.succes{
+    position: absolute;
+    place-content: end;
+    place-items: end;
+    justify-content: end;
+    justify-items: end;
+    width: 100%;
+    margin-top: -80%;
+    background: transparent;
+    z-index: 1000;
 }
 @media(max-width:760px) {
 
@@ -382,15 +419,17 @@ color: #ffff;
     display: flex;
     flex-direction: column;
 }
-/* .edit{
-    margin-top: 5%;
+.edit{
     width:100%;
     place-items: center;
-    place-content: none;
-    overflow-y: auto;
-    margin-left: 20%;
+}
+form{
+    overflow-x: auto;
     scrollbar-width: none;
-} */
+}
+#description{
+    width:80%
+}
 
 .modal-overlay .close button{
     margin-top: -1%;
@@ -398,4 +437,74 @@ color: #ffff;
 button{
 margin-left: -15%;
 }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* file-upload.component.css */
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #7F5539;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+.custom-file-upload button {
+ width: 100% ;
+ height: 150px;
+ border-radius: 50px;
+ border: 2px solid #7F5539 ;
+ background: transparent;
+
+}
+.custom-file-upload button label {
+font-size: 50px
+}
+.custom-file-upload  button:hover i,.custom-file-upload  button:hover label {
+color: #ffff;
+ cursor: pointer;
+}
+.custom-file-upload .upload button {
+width: 100px;
+height: 30px;
+font-size: 17px;
+border-radius: 5px !important;
+}
+.custom-file-upload .upload button:hover {
+background: #EDE0D4 !important;
+border: #EDE0D4 !important;
+color: #452b1b;
+}
+
+.custom-file-upload:hover,button:hover {
+  color: #583a26;
+  cursor: pointer;
+}
+
+
+.custom-file-upload  input {
+  display: none !important;
+}
+
+.custom-file-upload p {
+  margin-top: 10px;
+  font-style: italic;
+  color: #333;
 }

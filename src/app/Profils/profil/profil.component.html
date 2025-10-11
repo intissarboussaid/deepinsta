@@ -1,4 +1,10 @@
 <div class="container">
+  <div class="width100 start ">
+        <div class="back">
+            <button (click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
+        </div>
+    </div>
+    
     <div class="content_profil">
         <div class="personnel_informations">
             <div class="title">
@@ -13,7 +19,7 @@
                             <div class="fullname">
                                 <div class="nom">
                                     @if(nom && prenom){
-                                    <h6>{{nom}}</h6>
+                                    <p>{{nom}}</p>
                                     }@else {
                                     <div class="empty_content">
                                         enter your name full name
@@ -21,16 +27,16 @@
 
                                     }
                                 </div>
-                                                            <div class="prenom">
-                                @if(prenom ){
-                                <h6>{{prenom}}</h6>
-                                }
-                            </div>
+                                <div class="prenom">
+                                    @if(prenom ){
+                                    <p>{{prenom}}</p>
+                                    }
+                                </div>
                             </div>
 
                             <div class="phone">
                                 @if(phone){
-                                <h6>{{phone}}</h6>
+                                <p>PHONE: {{phone}}</p>
                                 }@else {
                                 <div class="empty_content">
                                     enter your phone number
@@ -38,11 +44,11 @@
                                 }
                             </div>
                             <div class="email">
-                                <h6>{{email}}</h6>
+                                <p>EMAIL: {{email}}</p>
                             </div>
                             <div class="date_naissance ">
                                 @if(date_naissance){
-                                <h6>{{date_naissance}}</h6>
+                                <p>{{date_naissance}}</p>
                                 }@else {
                                 <div class="empty_content">
                                     Please share your birthdate with us
@@ -50,9 +56,27 @@
                                 }
                             </div>
                             <div class="socialMediam" style="margin-top: 3%;">
-                                <div class="insta"><i class="fa-brands fa-instagram"></i></div>
-                                <div class="fb"><i class="fa-brands fa-facebook"></i></div>
-                                <div class="tiktok"><i class="fa-brands fa-tiktok"></i></div>
+                                @if(instagramme){
+                                <div class="insta"> <a href={{instagramme}}><i class="fa-brands fa-instagram"></i></a>
+                                </div>
+                                }@else{
+                                <div class="insta"> <a><i class="fa-brands fa-instagram"></i></a>
+                                </div>
+                                }
+                                @if(facebook){
+                                <div class="fb"><a href={{facebook}}><i class="fa-brands fa-facebook"></i></a></div>
+                                }@else{
+                                <div class="fb"><a><i class="fa-brands fa-facebook"></i></a></div>
+
+                                }
+                                @if(tiktok){
+                                <div class="tiktok"><a href={{tiktok}}><i class="fa-brands fa-tiktok"></i></a></div>
+                                }@else{
+                                <div class="tiktok"><a><i class="fa-brands fa-tiktok"></i></a></div>
+
+                                }
+
+
                             </div>
                         </div>
                     </div>
@@ -68,7 +92,7 @@
                     <h4>About me:</h4>
                     <div class="row">
                         @if(description){
-                        <h6> {{description}}</h6>
+                        <p> {{description}}</p>
                         }@else {
                         <div class="empty_content">
                             Share something about yourself here
@@ -79,7 +103,7 @@
                     <div class="row">
                         <h5>Adresse:</h5>
                         @if(local){
-                        <h6>{{local}}</h6>
+                        <p>{{local}}</p>
                         }@else {
                         <div class="empty_content">
                             Share your address with us
@@ -89,7 +113,7 @@
                     <div class="row">
                         <h5>Nationality:</h5>
                         @if(nationality){
-                        <h6>{{nationality}}</h6>
+                        <p>{{nationality}}</p>
                         }@else {
                         <div class="empty_content">
                             Share your address with us
@@ -99,7 +123,7 @@
                     <div class="row">
                         <h5>Gender:</h5>
                         @if(nationality){
-                        <h6>{{sexe}}</h6>
+                        <p>{{sexe}}</p>
                         }@else {
                         <div class="empty_content">
                             Share your Gender with us
@@ -109,7 +133,7 @@
                     <div class="row">
                         <h5>Website:</h5>
                         @if(site){
-                        <h6> {{site}}</h6>
+                        <p> {{site}}</p>
                         }@else {
                         <div class="empty_content">
                             share with us your website: https://yourwebsite.com
@@ -166,7 +190,7 @@
 
     </div>
 </div>
-<!-- dialog log out -->
+<!-- dialog edit photo -->
 <div class="modal-overlay" *ngIf="isModalEditPhotoOpen">
     <div class="modal">
         <div class="close">
@@ -174,10 +198,37 @@
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
-        <div class="btns">
-            <input type="file" (change)="onFileSelected($event)" />
-            <button (click)="uploadPhoto()">Upload Photo</button>
+        <div class="column">
+            <div class="custom-file-upload">
+                    <button>
+                <label for="fileInput" class="custom-file-upload">
+
+                    <div class="column">
+                        +
+                        <i class="fa-solid fa-camera"></i>
+                        <input type="file" id="fileInput" (change)="onFileSelected($event)" />
+                    </div>
+                </label>
+
+                    </button>
+
+                <p *ngIf="fileName">{{ fileName }}</p>
+                <div class="upload">
+                    <button (click)="uploadPhoto()">Save</button>
+                </div>
+            </div>
         </div>
+        @if(uploadErrorMessage){
+        <div class="error_message">
+            {{ uploadErrorMessage }}
+        </div>
+        }
+
+
+
+
+
+
 
 
     </div>
@@ -203,7 +254,19 @@
                         <input type="text" name="prenom" id="prenom" placeholder="Last Name .." [(ngModel)]="prenom"
                             required>
                     </div>
-
+                </div>
+                <div class="column">
+                    <label for="Gender">Gender: </label>
+                    <div class="row">
+                        <div class="row">
+                            <input type="radio" name="gender" value="male" [(ngModel)]="sexe">
+                            <h6>Male</h6>
+                        </div>
+                        <div class="row">
+                            <input type="radio" name="gender" value="female" [(ngModel)]="sexe">
+                            <h6>Female</h6>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="column">
@@ -212,51 +275,71 @@
                             required>
                     </div>
                     <div class="column">
-                        <label for="local">Location </label>
+                        <label for="local">Location:</label>
                         <input type="text" name="local" id="local" placeholder="Location" [(ngModel)]="local" required>
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="column">
-                        <label for="nationality">Nationality</label>
+                        <label for="nationality">Nationality:</label>
                         <input type="text" name="nationality" id="nationality" placeholder="Nationality"
                             [(ngModel)]="nationality" required>
                     </div>
                     <div class="column">
-                        <label for="date_naissance">BirthDate</label>
+                        <label for="date_naissance">BirthDate:</label>
                         <input type="date" name="date_naissance" id="date_naissance" placeholder="BirthDate"
                             [(ngModel)]="date_naissance" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="column">
-                        <label for="phone">Phone</label>
+                        <label for="phone">Phone:</label>
                         <input type="tel" name="phone" id="phone" placeholder="phone" [(ngModel)]="phone" required>
                     </div>
                     <div class="column">
-                        <label for="facebook">Facebook</label>
-                        <input type="text" name="facebook" id="facebook" placeholder="Url facebook"
+                        <label for="facebook">Facebook:</label>
+                        <input type="text" name="facebook" id="facebook" placeholder="Please enter your Facebook URL."
                             [(ngModel)]="facebook" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="column">
-                        <label for="">Instagrame</label>
-                        <input type="text" name="instagramme" id="instagramme" placeholder="Url Instagrame"
-                            [(ngModel)]="instagramme" required>
+                        <label for="">Instagrame:</label>
+                        <input type="text" name="instagramme" id="instagramme"
+                            placeholder="Please enter your Instagrame URL." [(ngModel)]="instagramme" required>
                     </div>
                     <div class="column">
-                        <label for="tiktok">TikTok</label>
-                        <input type="text" name="tiktok" id="tiktok" placeholder="Url Tiktok" [(ngModel)]="tiktok"
-                            required>
+                        <label for="tiktok">TikTok:</label>
+                        <input type="text" name="tiktok" id="tiktok" placeholder="Please enter your Tiktok URL."
+                            [(ngModel)]="tiktok" required>
                     </div>
 
+
                 </div>
-                    <input type="text" name="tiktok" id="description" placeholder="Description .." [(ngModel)]="description" required>
+                <div class="column">
+                    <label for="descriotion">Description:</label>
+                    <input type="text" name="description" id="description" placeholder="Description .."
+                        [(ngModel)]="description" required>
+                </div>
             </div>
             <button type="submit">save</button>
         </form>
     </div>
 </div>
+
+@if(editsucces){
+<div class="succes">
+    <div class="succes_message">
+        {{editsucces}}
+    </div>
+</div>
+}
+@if(uploadMessage){
+<div class="succes">
+    <div class="succes_message">
+        {{uploadMessage}}
+    </div>
+</div>
+}

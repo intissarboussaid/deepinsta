@@ -1,5 +1,5 @@
 .signup_content {
-    background: url(../../../assets/img/authentification.png) no-repeat center center / cover;
+    background: url(../../../assets/img/sign.png) no-repeat center center / cover;
     border-radius: 50px;
     width: 100%;
     height: 90vh;
@@ -164,7 +164,6 @@
     background: rgba(230, 204, 178, 0.8);
     color: #7F5539;
     place-content: center;
-    /* display: none; */
     flex-direction: column;
     gap: 10px;
     margin-top: 400px;
@@ -176,9 +175,6 @@
     font-weight: 500;
 }
 
-/* .signup_content .title_dropdown i {
-    rotate: 180deg;
-} */
 .rotated {
   transform: rotate(180deg);
 }

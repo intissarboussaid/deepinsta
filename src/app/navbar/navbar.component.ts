@@ -7,6 +7,7 @@ import { HistoriqueComponent } from '../Profils/historique/historique.component'
 import { AdminService } from '../Services/adminService/admin.service';
 import { UserService } from '../Services/useServicer/user.service';
 import { ProductManagerService } from '../Services/productMangerService/product-manager.service';
+import { CommandeService } from '../Services/CommandeService/commande.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,11 +19,18 @@ export class NavbarComponent {
   isDropdownOpen = false;
   isDropdownProfilOpen = false;
  isModalOpen = false;
-
+  isUser=false;
+  isAdmin=false;
+  commandes:any;
+  categoryList: String[] = ["All Categories","Phone & Electronique", "Clothes & Fashion", "Gaming & Digitals", "Sprots & Entertainement", "SelfCare & Product", "Kitchen & Home essentials", "Baby & Toy", "Books & Education", "Car & Accessoires", "Animals", "Magasin"];
+isOpenCateogy=false;
+  
   openModal() {
     this.isModalOpen = true;
   }
-
+openCateogiry(){
+  this.isOpenCateogy=!this.isOpenCateogy;
+}
   closeModal() {
     this.isModalOpen = false;
   }
@@ -57,22 +65,21 @@ export class NavbarComponent {
     this.isRotated = !this.isRotated;
     console.log('isRoteted', this.isRotated);
   }
-  constructor(private auth: AuthentificationService, private router: Router, private dialog: MatDialog,private adminService:AdminService,private userService:UserService,private ProductManagerService: ProductManagerService) { }
+  constructor(private auth: AuthentificationService, private router: Router, private dialog: MatDialog,private adminService:AdminService,private userService:UserService,private ProductManagerService: ProductManagerService,private commandeService:CommandeService) { }
   ngOnInit(): void {
     const id_account = localStorage.getItem('id_account');
     if (id_account != null) {
       this.exist = !this.exist;
-      console.log('account true', id_account);
       this.auth.getById(id_account).subscribe({
         next: (res) => {
-          console.log('account', res);
           const account = res;
           if (account.admin) {
+            this.isAdmin=true;
             this.img = account.admin.photo;
+
             if (this.img != null) {
               this.adminService.getPhotoAdmin(localStorage.getItem('id_admin')).subscribe(
                 blob=>{
-                  console.log("photo admin: ",blob);
                   const objectURL = URL.createObjectURL(blob);
                   this.src = objectURL;
                 }
@@ -81,6 +88,7 @@ export class NavbarComponent {
               this.src = '../../assets/img/photo_profil.jpg';
             }
           } else if (account.user) {
+            this.isUser=true;
             this.img = account.user.photo;
             if (this.img != null) {
               this.userService.getPhotoUser(localStorage.getItem('id_user')).subscribe(
@@ -92,6 +100,7 @@ export class NavbarComponent {
             } else {
               this.src = '../../assets/img/photo_profil.jpg';
             }
+
           } else {
             this.img = account.product_manager.photo;
             if (this.img != null) {
@@ -109,17 +118,26 @@ export class NavbarComponent {
         },
       })
     }
+    
+    const admin = localStorage.getItem('id_admin');
+    const user = localStorage.getItem('id_user');
+    const PM = localStorage.getItem('id_pm');
+    if(user!=null){
+    this.commandeService.GetCommandesNotConfByUser(user).subscribe({
+      next:(res)=>{
+        this.commandes=res;
+      }, error:(err)=>{
+        console.log('error not conf commandes by user', err)
+      }
+    })
+    }
+  
+
   }
   profil() {
     const token = localStorage.getItem('token');
     this.router.navigate([`/profil/${token}`]);
   }
-  setting() {
-    const token = localStorage.getItem('token');
-    this.router.navigate([`/setting/${token}`]);
-  }
-
-
   // openLogoutDialog() {
   //   const dialogRef = this.dialog.open(HistoriqueComponent);
 
@@ -134,4 +152,11 @@ export class NavbarComponent {
     this.router.navigate(['/login'])
     console.log("Logged out");
   }
+  gotToCommandes(){
+    this.router.navigate(['/commande/', localStorage.getItem('token')])
+  }
+  setting(){
+    this.router.navigate(['/setting/', localStorage.getItem('id_account')])
+  }
+
 }

@@ -18,12 +18,16 @@ export class ForgetPasswordComponent {
   passwordError = '';
   psw = '';
   confirmationpsw = '';
+  errorEmail="";
   constructor(private auth: AuthentificationService, private router: Router) { }
   prevSlide() {
     this.currentIndex = this.currentIndex === 0 ? 1 : 0;
   }
   nextSlide() {
     this.currentIndex = this.currentIndex === 1 ? 0 : 1;
+  }
+  next3rdSlide() {
+    this.currentIndex = this.currentIndex === 2 ? 0 : 2;
   }
 
   onSubmit(form: NgForm) {
@@ -39,7 +43,7 @@ export class ForgetPasswordComponent {
           // setTimeout(() => {
           //   this.loginMessage = null;
           // }, 10000);
-          this.currentIndex = this.currentIndex === 1 ? 0 : 1;
+          this.currentIndex = this.currentIndex === 2 ? 0 : 2;
 
         },
         error: (err) => {
@@ -72,6 +76,7 @@ export class ForgetPasswordComponent {
           localStorage.setItem('id_account',res.id_account);
           localStorage.setItem('token',res.token);
           this.router.navigate(['/login']);
+          this.currentIndex = this.currentIndex === 2 ? 0 : 1;
           
         },
         error: (err) => {
@@ -87,7 +92,19 @@ export class ForgetPasswordComponent {
       console.log(" form invalid!");
       console.log(" password", this.psw);
       console.log(" confirmation password", this.confirmationpsw);
-      this.passwordError = "Both password fields must be filled!."
+      this.passwordError = "Both password fields must match!."
     }
+  }
+  GeTAccountByEmail(){
+    this.auth.getEmail(this.email).subscribe({
+      next:(res)=>{
+        console.log("account", res);
+        this.currentIndex = this.currentIndex === 1 ? 0 : 1;
+      },error:(err)=>{
+        console.log("error Email", err);
+        this.errorEmail="No account found with this email address."
+      }
+    })
+
   }
 }

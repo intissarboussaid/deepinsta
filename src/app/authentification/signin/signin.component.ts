@@ -40,24 +40,6 @@ export class SigninComponent implements OnInit {
     this.router.navigate(['signUp']);
   }
 
-  // onSubmit() {
-  //   this.isLoading = true;
-  //   this.errorMessage = '';
-
-  //   this.authentification.login({ email: this.email, password: this.password }).subscribe(
-  //     (response: any) => {
-  //       console.log('response', response);
-  //       //  localStorage.setItem('access_token', res.token);
-  //       this.router.navigate(['']);
-  //       this.isLoading = false;
-  //     },
-  //     (error: any) => {
-  //       this.errorMessage = 'Invalid username or password';
-  //       this.isLoading = false;
-  //       console.error('Login error:', error);
-  //     }
-  //   );
-  // }
   onSubmit(form: NgForm) {
     if (form.valid) {
       const credentials = {
@@ -73,43 +55,29 @@ export class SigninComponent implements OnInit {
 
               next: (res) => {
                 console.log('Login response:', res);
-                const token = res?.body?.account?.token;
-                const account = res?.body?.account;
-                if (token && account) {
-                  localStorage.setItem('email', res.email);
-                  localStorage.setItem('id_account', res.id_account);
-                  localStorage.setItem('token', res.token);
+                  localStorage.setItem('email', res.account.email);
+                  localStorage.setItem('id_account', res.account.id_account);
+                  localStorage.setItem('token', res.token);              
+                if (res.account.user!=null) {
+                  console.log("user: ",res.account.user)
+                  localStorage.setItem('id_user', res.account.user.id_user);
+                } else if (res.account.admin!=null) {
+                  console.log("addmin: ",res.account.admin)
+                  localStorage.setItem('id_admin', res.account.admin.id_admin)
+                }else if (res.account.product_manager!=null) {
+                  console.log("product Manager: ",res.account.product_manager)
+                  localStorage.setItem('id_admin', res.account.product_manager.id_pm)
                 }
-                if (res.user) {
-                  localStorage.setItem('id_user', res.user.id_user);
-                } else if (res.admin) {
-                  localStorage.setItem('id_admin', res.admin.id_admin)
-                }
+            this.router.navigate(['/categoris']);
               },
               error: (err) => {
                 console.error('Login failed:', err.error);
                 this.loginError = "There's an error. Please try again";
-                console.log("email", this.email);
-                console.log("password", this.psw);
               }
             });
-            this.router.navigate(['/categoris']);
-            console.log("id_account", res.id_account);
-            localStorage.setItem("id_account", res.id_account);
-            localStorage.setItem('email', res.email);
+
           } else {
-            console.log("id_account", res.id_account);
-            localStorage.setItem("id_account", res.id_account);
-            console.log("id_account", res.id_account);
-            localStorage.setItem('email', res.email);
             this.loginError = "This account isn't activated. Please activate it through the email we sent you";
-          }
-          if (res.admin) {
-            localStorage.setItem("id_admin", res.admin.id_admin);
-          } else if (res.user) {
-            localStorage.setItem("id_user", res.user.id_user);
-          } else {
-            localStorage.setItem("id_pm", res.product_manager.id_);
           }
         },
         error: (err) => {

@@ -2,16 +2,17 @@ import { Component } from '@angular/core';
 import { AdminService } from '../../Services/adminService/admin.service';
 import { AuthentificationService } from '../../authentification/authentification.service';
 import { Router } from '@angular/router';
-import { NgIf } from '@angular/common';
+import { Location, NgIf } from '@angular/common';
 import { UserService } from '../../Services/useServicer/user.service';
 import { ProductManagerService } from '../../Services/productMangerService/product-manager.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SidebarComponent } from "../../sidebar/sidebar.component";
 
 @Component({
   selector: 'app-profil',
-  imports: [NgIf,FormsModule, HttpClientModule],
+  imports: [NgIf, FormsModule, HttpClientModule],
   templateUrl: './profil.component.html',
   styleUrl: './profil.component.css'
 })
@@ -36,6 +37,12 @@ export class ProfilComponent {
   isModalEditPhotoOpen = false;
   isModalEditProfilOpen = false;
   selectedFile: File | null = null;
+  uploadMessage: string | null | undefined;
+  uploadErrorMessage = "";
+  editsucces: string | null | undefined;
+  isUser:any;
+  isAdmin:any;
+  isPm:any;
 
   openModal() {
     this.isModalOpen = true;
@@ -59,11 +66,21 @@ export class ProfilComponent {
     this.isModalEditProfilOpen = false;
   }
 
-  constructor(private admin: AdminService, private auth: AuthentificationService, private router: Router, private userService: UserService, private productManagerService: ProductManagerService, private sanitizer: DomSanitizer) {
+  constructor(private admin: AdminService, private auth: AuthentificationService, private router: Router, private userService: UserService, private productManagerService: ProductManagerService, private location: Location) {
 
   }
   ngOnInit(): void {
-    if (localStorage.getItem('id_admin')) {
+    this.isUser=localStorage.getItem('id_user');
+    this.isAdmin=localStorage.getItem('id_admin');
+    this.isPm=localStorage.getItem('id_pm');
+
+
+    if(this.isUser!=null){
+    console.log('user',localStorage.getItem('id_user'))
+
+    }
+
+    if (this.isAdmin!=null) {
       this.admin.getAdmin(localStorage.getItem('id_admin')).subscribe({
         next: (res) => {
           console.log("admin: ", res);
@@ -98,9 +115,10 @@ export class ProfilComponent {
         }
       })
     }
-    else if (localStorage.getItem('id_user')) {
+    if (this.isUser!=null) {
       this.userService.getUser(localStorage.getItem('id_user')).subscribe({
         next: (res) => {
+           console.log('user',res)
           this.phone = res.phone;
           this.nom = res.nom;
           this.prenom = res.prenom;
@@ -134,9 +152,10 @@ export class ProfilComponent {
 
 
     }
-    else if (localStorage.getItem('id_pm')) {
+   if (this.isPm!=null) {
       this.productManagerService.getPM(localStorage.getItem('id_pm')).subscribe({
         next: (res) => {
+          console.log('Pm',res)
           this.phone = res.phone;
           this.nom = res.nom;
           this.prenom = res.prenom;
@@ -168,75 +187,90 @@ export class ProfilComponent {
         }
       })
     }
+    this.uploadMessage= localStorage.getItem('uploadMessage');
+    if (this.uploadMessage) {
+      setTimeout(() => {
+        this.uploadMessage = "";
+        localStorage.removeItem('uploadMessage');
+      }, 10000);
+    }
+    this.editsucces = localStorage.getItem('editSuccess');
+    if (this.editsucces) {
+      setTimeout(() => {
+        this.editsucces = "";
+        localStorage.removeItem('editSuccess');
+      }, 10000);
+    }
+
   }
   onSubmitt(form: NgForm) {
-        if (form.valid) {
-    const adminBody = {
+    if (form.valid) {
+      const adminBody = {
 
-      nom: this.nom,
-      prenom: this.prenom,
-      phone: this.phone,
-      adresse: this.adresse,
-      local: this.local,
-      date_naissance: this.date_naissance,
-      site: this.site,
-      sexe: this.sexe,
-      nationnalité: this.nationality,
-      instagramme: this.instagramme,
-      facebook: this.facebook,
-      tiktok: this.tiktok,
-     description:this.description
+        nom: this.nom,
+        prenom: this.prenom,
+        phone: this.phone,
+        adresse: this.adresse,
+        local: this.local,
+        date_naissance: this.date_naissance,
+        site: this.site,
+        sexe: this.sexe,
+        nationnalité: this.nationality,
+        instagramme: this.instagramme,
+        facebook: this.facebook,
+        tiktok: this.tiktok,
+        description: this.description
+      }
+      const admin = localStorage.getItem('id_admin');
+      const user = localStorage.getItem('id_user');
+      const productManger = localStorage.getItem('id_pm');
+
+      if (admin != null) {
+        this.admin.updateInformations(localStorage.getItem('id_admin'), adminBody).subscribe({
+          next: (res) => {
+            console.log('admin', res)
+            this.img = res.photo;
+            console.log('photo admin', res.photo)
+
+          }, error: (err) => {
+            console.log('error ', err)
+          }
+        })
+      }
+      if (user != null) {
+        this.userService.updateInformations(localStorage.getItem('id_user'), adminBody).subscribe({
+          next: (res) => {
+            console.log('User', res)
+            this.img = res.photo;
+            console.log('User photo', res.photo)
+
+          }, error: (err) => {
+            console.log('error ', err)
+          }
+        })
+      }
+      if (productManger != null) {
+        this.admin.updateInformations(localStorage.getItem('id_pm'), adminBody).subscribe({
+          next: (res) => {
+            console.log('product manager', res)
+            this.img = res.photo;
+            console.log('photo PM', res.photo)
+
+          }, error: (err) => {
+            console.log('error ', err)
+          }
+        })
+
+      } else {
+        console.log('form invalid');
+      }
     }
-    const admin = localStorage.getItem('id_admin');
-    const user = localStorage.getItem('id_user');
-    const productManger = localStorage.getItem('id_pm');
-
-    if (admin !=null) {
-      this.admin.updateInformations(localStorage.getItem('id_admin'), adminBody).subscribe({
-        next: (res) => {
-          console.log('admin', res)
-          this.img = res.photo;
-          console.log('photo admin', res.photo)
-
-        }, error: (err) => {
-          console.log('error ', err)
-        }
-      })
-    }
-    if (user!=null) {
-      this.admin.updateInformations(localStorage.getItem('id_user'), adminBody).subscribe({
-        next: (res) => {
-          console.log('User', res)
-          this.img = res.photo;
-          console.log('User photo', res.photo)
-
-        }, error: (err) => {
-          console.log('error ', err)
-        }
-      })
-    }
-    if (productManger!=null) {
-            this.admin.updateInformations(localStorage.getItem('id_pm'), adminBody).subscribe({
-        next: (res) => {
-          console.log('product manager', res)
-          this.img = res.photo;
-          console.log('photo PM', res.photo)
-
-        }, error: (err) => {
-          console.log('error ', err)
-        }
-      })
-
-    }else {
-      console.log('form invalid');
-    }
-  }
   }
   favorite() {
     this.router.navigate(['/favorite']);
   }
   history() {
-    this.router.navigate(['/history']);
+    this.router.navigate(['/history/', localStorage.getItem('id_account')]);
   }
 
   logout() {
@@ -245,39 +279,64 @@ export class ProfilComponent {
     console.log("Logged out");
   }
   onFileSelected(event: any): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.fileName = input.files[0].name;
+    }
     this.selectedFile = event.target.files[0];
   }
 
   uploadPhoto(): void {
     if (this.selectedFile) {
       if (localStorage.getItem('id_admin')) {
-        this.admin.updateAdminPhoto(1, this.selectedFile).subscribe({
-          next: (response) => console.log('Upload successful:', response),
-          error: (err) => console.error('Upload error:', err)
+        this.admin.updateAdminPhoto(localStorage.getItem('id_admin'), this.selectedFile).subscribe({
+          next: (response) => {
+            console.log('Upload successful:', response);
+            localStorage.setItem('uploadMessage', '✅ File uploaded successfully!');
+            window.location.reload();
+          },
+          error: (err) => {
+            console.error('Upload error:', err);
+            this.uploadErrorMessage = "Something went wrong during upload.";
+          }
         });
       }
-
       else if (localStorage.getItem('id_user')) {
-        this.userService.updateUserPhoto(1, this.selectedFile).subscribe({
-          next: (response) => console.log('Upload successful:', response),
-          error: (err) => console.error('Upload error:', err)
+        this.userService.updateUserPhoto(localStorage.getItem('id_user'), this.selectedFile).subscribe({
+          next: (response) => {
+            console.log('Upload successful:', response);
+            localStorage.setItem('uploadMessage', '✅ File uploaded successfully!');
+            window.location.reload();
+  
+          },
+          error: (err) => {
+            console.error('Upload error:', err);
+            this.uploadErrorMessage = "Something went wrong during upload.";
+          }
         });
       }
 
       else if (localStorage.getItem('id_pm')) {
-        this.productManagerService.updatePMPhoto(1, this.selectedFile).subscribe({
-          next: (response) => console.log('Upload successful:', response),
-          error: (err) => console.error('Upload error:', err)
+        this.productManagerService.updatePMPhoto(localStorage.getItem('id_pm'), this.selectedFile).subscribe({
+          next: (response) => {
+            console.log('Upload successful:', response);
+            localStorage.setItem('uploadMessage', '✅ File uploaded successfully!');
+            window.location.reload();
+
+          },
+          error: (err) => {
+            console.error('Upload error:', err);
+            this.uploadErrorMessage = "Something went wrong during upload.";
+          }
         });
       }
 
     }
   }
 
- onSubmit() {
+  onSubmit() {
 
     const adminBody = {
-
       nom: this.nom,
       prenom: this.prenom,
       phone: this.phone,
@@ -290,42 +349,62 @@ export class ProfilComponent {
       instagramme: this.instagramme,
       facebook: this.facebook,
       tiktok: this.tiktok,
-     description:this.description
+      description: this.description
     }
     const admin = localStorage.getItem('id_admin');
     const user = localStorage.getItem('id_user');
     const productManger = localStorage.getItem('id_pm');
 
-    if (admin !=null) {
+    if (admin != null) {
       this.admin.updateInformations(localStorage.getItem('id_admin'), adminBody).subscribe({
         next: (res) => {
-          console.log('admin', res)
+          console.log('admin', res);
+          localStorage.setItem('editSuccess', '✅ You successfully edited your profile.');
+          window.location.reload();
+
 
         }, error: (err) => {
           console.log('error ', err)
         }
       })
     }
-    if (user!=null) {
-      this.admin.updateInformations(localStorage.getItem('id_user'), adminBody).subscribe({
+    if (user != null) {
+      this.userService.updateInformations(localStorage.getItem('id_user'), adminBody).subscribe({
         next: (res) => {
-          console.log('User', res)
-
+          console.log('User', res);
+          localStorage.setItem('editSuccess', '✅ You successfully edited your profile.');
+          window.location.reload();
         }, error: (err) => {
           console.log('error ', err)
         }
       })
     }
-    if (productManger!=null) {
-            this.admin.updateInformations(localStorage.getItem('id_pm'), adminBody).subscribe({
+    if (productManger != null) {
+      this.productManagerService.updateInformations(localStorage.getItem('id_pm'), adminBody).subscribe({
         next: (res) => {
-          console.log('product manager', res)
+          console.log('product manager', res);
+          localStorage.setItem('editSuccess', '✅ You successfully edited your profile.');
+          window.location.reload();
 
         }, error: (err) => {
           console.log('error ', err)
         }
       })
 
+    }
   }
+
+
+  fileName: string | null = null;
+
+  onFileSelectedsigne(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.fileName = input.files[0].name;
+    }
   }
+goBack() {
+    this.location.back();
+  }
+
 }
