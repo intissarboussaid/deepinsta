@@ -1,3 +1,5 @@
+
+<app-navbar></app-navbar>
 <div class="container">
   <div class="width100 start ">
         <div class="back">
@@ -145,22 +147,22 @@
                 <br><br>
             </div>
             <div class="content">
-                <div class="fav row">
+                <div class="fav row" (click)="favorite()">
                     <div class="left">
-                        <i class="fa-solid fa-star" (click)="favorite()"></i>
+                        <i class="fa-solid fa-star" ></i>
                         <h6 (click)="favorite()">Favorite</h6>
                     </div>
                     <i class="fa-solid fa-chevron-right" (click)="favorite()"></i>
                 </div>
-                <div class="historique row">
+                <div class="historique row" (click)="  history()">
                     <div class="left">
                         <i class="fa-solid fa-clock-rotate-left" (click)="  history()"></i>
-                        <h6 (click)="  history()">History </h6>
+                        <h6 >History </h6>
                     </div>
                     <i class="fa-solid fa-chevron-right" (click)="  history()"></i>
                 </div>
-                <div class="logOut row">
-                    <div class="left" (click)=" openModal()">
+                <div class="logOut row" (click)=" openModal()">
+                    <div class="left" >
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <h6> logOut </h6>
                     </div>

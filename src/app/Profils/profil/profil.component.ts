@@ -9,10 +9,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from "../../sidebar/sidebar.component";
+import { NavbarComponent } from "../../navbar/navbar.component";
 
 @Component({
   selector: 'app-profil',
-  imports: [NgIf, FormsModule, HttpClientModule],
+  imports: [NgIf, FormsModule, HttpClientModule, NavbarComponent],
   templateUrl: './profil.component.html',
   styleUrl: './profil.component.css'
 })

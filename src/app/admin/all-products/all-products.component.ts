@@ -755,14 +755,14 @@ const Discount={
         console.log('delete product', res);
         localStorage.setItem("DeleteMessage", "You have successfully deleted the product.");
         this.DeleteMessage = localStorage.getItem("DeleteMessage");
-        window.location.reload();
+        // window.location.reload();
         this.isModalDeleteOpen = false;
       },
       error: (err) => {
         console.log('error delete product', err);
         localStorage.setItem("errorDelete", "Error: Failed to delete the product.")
         this.errorDelete = localStorage.getItem("errorDelete");
-        window.location.reload();
+        // window.location.reload();
       }
     })
   }

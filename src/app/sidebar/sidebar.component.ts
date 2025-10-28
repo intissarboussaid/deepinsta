@@ -24,7 +24,7 @@ export class SidebarComponent {
     })
   }
 dashboard(){
-this.router.navigate(['/adminDashboard/', localStorage.getItem('token')])
+this.router.navigate(['/dashboard?admin/', localStorage.getItem('id_admin')])
 }
 AddProduct(){
 this.router.navigate(['/addProduct/', localStorage.getItem('token')])
@@ -43,7 +43,12 @@ customers(){
 this.router.navigate(['/customers?product/', localStorage.getItem('id_admin')])
   }
 }
+ profil() {
+    const token = localStorage.getItem('token');
+    this.router.navigate([`/profil/${token}`]);
+  }
 setting(){
     this.router.navigate(['/setting/', localStorage.getItem('id_account')])
   }
+
 }

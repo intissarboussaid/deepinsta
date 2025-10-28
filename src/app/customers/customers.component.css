@@ -44,7 +44,7 @@ img{
     width: auto;
     border-radius: 20px;
 }
-.row{
+td .row{
     gap: 15%;
 }
 
@@ -108,7 +108,7 @@ img{
   background-color: rgba(236, 197, 170, 0.2);
     border-color: red;
 }
-
+/* .modal */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -138,21 +138,67 @@ img{
   text-align: center;
   overflow-y: auto;
 }
-
-.content_modal {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.modal-overlay .close{
   width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-top: 0px;
+  margin-bottom: 10px;
 }
-.content_modal .column {
-place-content: center;
-place-items: center;
-width: 100%;
+.close button{
+width: 30px;
+height: 30px;
+display: flex;
+text-align: center;
+justify-content: center;
+border-radius: 20px;
+border: 2px solid #5b3d29;
 }
-.close_btn{
-  background: transparent !important;
-  color: #6b3d1f !important;
+.close i{
+margin-top: 2px;
+font-size: 20px;
+color: #5b3d29;
+cursor: pointer;
+}
+.modal input{
+  border-bottom-left-radius:20px;
+  border-top-left-radius: 20px;
+    border: 2px solid #7f5539;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    place-content: center;
+    place-items: center;
+    width: 50%;
+    height:40px
+}
+.modal .percent{
+  border-top:2px solid #7f5539 ;
+  border-bottom:2px solid #7f5539 ;
+  border-right: 2px solid #7f5539 ;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  height: 40px;
+  width: 40px;
+  background-color: rgba(127, 85, 57,0.4);
+  color: #5b3d29;
+  font-size: 20px;
+}
+form .row{
+  margin-bottom: 25px;
+}
+form button{
+  width: 70px;
+  height: 40px;
+  border: 2px solid #5b3d29;
+  border-radius: 10px;
+  background-color: rgba(103, 70, 48, 0.4);
+  color: #5b3d29;
+  font-size: 20px;
+}
+h1{
+  margin-bottom: 15px;
+}
+.code button {
+  border: none;
 }
 @media(max-width:900px){
     .first_child i{

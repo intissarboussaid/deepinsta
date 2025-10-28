@@ -357,6 +357,7 @@ if(id_admin!=null){
       this.favoriteService.AddFavByUser(localStorage.getItem('id_product'), localStorage.getItem('id_user'),{favBody}).subscribe({
       next:(res)=>{
         console.log('resultat add favorite',res);
+        window.location.reload();
       }
     })
     }
@@ -364,6 +365,7 @@ if(id_admin!=null){
       this.favoriteService.AddFavByAdmin(localStorage.getItem('id_product'), localStorage.getItem('id_admin'),{favBody}).subscribe({
       next:(res)=>{
         console.log('resultat add favorite',res);
+        window.location.reload();
       }
     })
     }

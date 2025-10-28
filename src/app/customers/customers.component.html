@@ -62,13 +62,14 @@
 
                     </td>
                     <td>
-                        <div class="center transparent">
+                        <div class="center transparent column code">
                             @if(i.fidele){
-                                <button  (click)="openModal(i.user.id_user)">add</button>
+                            <button (click)="openModalEdit(i.user.id_user)"><i class="fa-solid fa-pen"></i></button>
                             }@else {
-                                <button  (click)="NotFifele()">add</button>
+                            <button (click)="NotFifele()"><i class="fa-solid fa-pen"></i></button>
                             }
-                            
+                            <button (click)="openModalContent(i.user.id_user)">
+                                <i class="fa-solid fa-eye"></i></button>
                         </div>
                     </td>
                 </tr>
@@ -98,22 +99,61 @@
 
     <!-- modal valid -->
     @if(isModalOpen){
-    <div class="modal-overlay  ">
+    <div class="modal-overlay">
         <div class="modal" style="width: 50%;height: 30%;">
-            <div class="close" style="width:100%; margin-top: -10px;">
-                <button type="button" (click)="closeModal()">
-                    <i class="fa-solid fa-xmark"></i>
+            <div class="close transparent">
+                <button type="button" (click)="closeModal()" class="transparent">
+                    <i class="fa-solid fa-xmark transparent"></i>
                 </button>
             </div>
-            <form (ngSubmit)="addCodePromo()">
-                <div class="row">
-                    <input type="number" name="percent" id="percent" min="0" max="100" step="0.01"
-                        [(ngModel)]="perecent" placeholder="10" required #perecentRef="ngModel">
-                    <div class="">%</div>
+            @if(edit){
+            <div class="title transparent">
+                <h2 class="transparent">Edit Promo Code (Percent-Based Only)</h2>
+            </div>
+            <form (ngSubmit)="addCodePromo()" class="transparent width100 center">
+                <div class="column transparent width100 center">
+                    <div class="row transparent width100 center">
+                        <input type="number" name="percent" id="percent" min="0" max="100" [(ngModel)]="perecent"
+                            placeholder="10" required #perecentRef="ngModel">
+                        <div class="percent center">%</div>
+
+                    </div>
+                    @if (perecentRef.dirty || perecentRef.touched) {
+                    <div class="alert transparent">
+                        @if (perecentRef.hasError('required')) {
+                        <div class="alert red transparent">
+                            Enter Discount (%) – Numbers Only.
+                        </div>
+                        }
+                        @if (perecentRef.hasError('min')) {
+                        <div class="alert red transparent">
+                            Minimum allowed discount is 0%.
+                        </div>
+                        }
+                        @if (perecentRef.hasError('max')) {
+                        <div class="alert red transparent">
+                            Maximum allowed discount is 100%.
+                        </div>
+                        }
+                    </div>
+                    }
+                    <button type="submit" class=" center ">Save</button>
                 </div>
-                <button type="submit">add</button>
+
 
             </form>
+            }
+            @if(content){
+            <div class="title transparent" style="margin-bottom: 50px;">
+                <h2 class="transparent">Promo Code</h2>
+            </div>
+            <div class="transparent center column">
+               <div class="row transparent width100" style="margin-bottom: 10px; color:#9e6e4e ;"> Name: <h4 class="transparent" style="margin-left: 10px; cursor: text;">{{codePromo.name}}</h4></div> 
+               <div class="row transparent width100" style="margin-bottom: 10px; color:#9e6e4e ;"> Percent: <h4 class="transparent" style="margin-left: 10px; cursor: text;">{{codePromo.percent}}%</h4> <i class="fa-solid fa-pen transparent" (click)="openModalEdit(id_user)" style="margin-left: 10px; cursor: pointer;"></i> </div>
+            </div>
+
+            }
+
 
 
         </div>

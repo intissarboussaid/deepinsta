@@ -5,10 +5,10 @@
                 <h1> <a href="">DeepShop</a></h1>
             </div>
             <div class="menu column">
-                <li class="row"> <i class="fa-solid fa-folder-open"></i><a (click)="dashboard()">Dashboard</a> </li>
-                <li class="row"> <i class="fa-solid fa-chart-pie"></i><a href="">Analytics</a></li>
-                <div class="products">
-                 <li class="row"> <i class="fa-solid fa-tag"></i><a >Products</a></li>
+                <li class="row" (click)="dashboard()"> <i class="fa-solid fa-folder-open"></i><a >Dashboard</a> </li>
+                <!-- <li class="row"> <i class="fa-solid fa-chart-pie"></i><a href="">Analytics</a></li> -->
+                <div class="products transparent">
+                 <li class="row transparent"> <i class="fa-solid fa-tag transparent"></i><a class="transparent" >Products</a></li>
                 <div class="product_menu column">
                     <li (click)="AddProduct()"><i class="fa-solid fa-circle-plus"></i><a>Add Product</a></li>
                     <li (click)="AllProducts()"><i class="fa-solid fa-folder-open"></i><a>ALL Products</a></li>
@@ -34,7 +34,7 @@
                 </li>
                 <li class="row" (click)="customers()"> <i class="fa-solid fa-users"></i><a >Customers</a> </li>
                 <!-- <li class="row"> <i class="fa-solid fa-tags"></i><a href="">Marketing</a> </li> -->
-                <li class="row" (click)="setting()"> <i class="fa-solid fa-sliders"></i><a >Settings</a> </li>
+                <li class="row" (click)="profil()"> <i class="fa-solid fa-sliders"></i><a >Settings</a> </li>
             </div>
         </div>
     </div>

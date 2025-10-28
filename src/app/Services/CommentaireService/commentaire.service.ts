@@ -23,4 +23,7 @@ AddCommentaireByAdmin(id_product:any, id_user:any,Commentaire:any): Observable<a
   getCommentaireByUser(id_user:any,): Observable<any> {
     return this.http.get(`${this.apiUrl}get/user/${id_user}`);
   }
+  getAllCommentairesToAdmin(id_admin:any,): Observable<any> {
+    return this.http.get(`${this.apiUrl}get/admin/commentaires/${id_admin}`);
+  }
 }

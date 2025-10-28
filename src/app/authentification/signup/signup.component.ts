@@ -14,7 +14,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveForms
 
 export class SignupComponent {
   selectedRole = '';
-  roles: string[] = ['Admin', 'Product manager', 'User'];
+  roles: string[] = ['Admin', 'User'];
   isDropdownOpen = false;
   isRotated = false;
   role = '';

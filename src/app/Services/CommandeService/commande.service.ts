@@ -53,5 +53,8 @@ export class CommandeService {
   CancelCmdByAdmin(id_cmdItem: any) {
     return this.http.get(`${this.apiUrl}cancel/cmd/admin/${id_cmdItem}`);
   }
+  DeleteCommande(id_cmd: any) {
+    return this.http.delete(`${this.apiUrl}delete/commande/${id_cmd}`);
+  }
 
 }
