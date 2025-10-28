@@ -8,9 +8,13 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.deepinsta.modal.Admin;
+import com.deepinsta.modal.FileResponse;
 import com.deepinsta.modal.Photo;
 import com.deepinsta.modal.Product;
 import com.deepinsta.repository.PhotoRepository;
@@ -49,6 +53,7 @@ public class PhotoService {
         
         return photoRepository.save(photo);
     }
+    //save photos by id_roduct
     public List<Photo> savePhotoProduct(List<MultipartFile> files, long id_product) throws IOException {
         // 1. Generate a unique filename
     	  
@@ -68,18 +73,52 @@ public class PhotoService {
         photo.setContentType(file.getContentType());
         photo.setSize(file.getSize());
         photos.add(photo);
-
-    	  }  
-    	  
+    	  }   	  
           return   photoRepository.saveAll(photos);    
-    }
+    } 
+	public ResponseEntity<byte[]> getPhoto(long id) throws IOException {
+	    Photo photo = getPhotoById(id);
+	    Path path = Paths.get(photo.getFilePath());
+	    System.out.println("path photo : "+path);
+	    byte[] fileBytes = Files.readAllBytes(path);
+	    System.out.println("file byte photo : "+fileBytes);
+	    return ResponseEntity.ok()
+	            .contentType(MediaType.parseMediaType(photo.getContentType()))
+	            .body(fileBytes);
+	}
+	
+	public byte[] findPhoto(long id) throws IOException {
+	    Photo photo = getPhotoById(id);
+	    Path path = Paths.get(photo.getFilePath());
+	    System.out.println("path photo : "+path);
+	    byte[] fileBytes = Files.readAllBytes(path);
+	    System.out.println("file byte photo : "+fileBytes);
+	    return fileBytes;
+	}
+	
+	
+	public List<ResponseEntity<byte[]>> getPhotos(List<Photo> photos) throws IOException {
+	List<ResponseEntity<byte[]>> images = new ArrayList<>();
+		   for (Photo photo : photos) {		   
+			   ResponseEntity<byte[]> image=getPhoto(photo.getId_photo());
+			   images.add(image);
+		   }
+		   images.addAll(images);
+	    
 
+	    return images;
+	          
+	}
     
     public List<Photo> GetAllPhoto(){
     	return photoRepository.findAll();
     }
     public Photo getPhotoById(long id) {
     	return photoRepository.findById(id);
+    }
+    public void deletePhoto(long id) {
+    	Photo photo = getPhotoById(id);
+    	photoRepository.delete(photo);
     }
     
     

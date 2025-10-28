@@ -1,6 +1,7 @@
 package com.deepinsta.modal;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -46,6 +48,7 @@ public class Users {
 	String facebook;
 	@Column(name = "tiktok")
 	String tiktok;
+
 	  @Column(name = "phone")
 	    private String phone;
 		@Column(name = "description")
@@ -174,6 +177,8 @@ public class Users {
 	public void setPhoto(Photo photo) {
 		this.photo = photo;
 	}
+
+
 
 	public Users(String nom, String prenom, String adresse, String local, String date_naissance, String site, String sexe,
 			String nationnalité, String instagramme, String facebook, String tiktok, Photo photo) {

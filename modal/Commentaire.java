@@ -17,7 +17,7 @@ public class Commentaire {
 	@Column(name="id_commentaire")
 	long id_commentaire;
 	
-	@Column(name="commentaire")
+	@Column(columnDefinition = "TEXT") 
 	String commentaire;
 	
 	@Column(name="nbre")
@@ -25,7 +25,11 @@ public class Commentaire {
 		
 	@ManyToOne
 	Product product;
-
+	
+	@ManyToOne
+	Users user;
+	@ManyToOne
+	Admin admin;
 	public long getId_commentaire() {
 		return id_commentaire;
 	}
@@ -63,6 +67,22 @@ public class Commentaire {
 		this.commentaire = commentaire;
 		this.nbre = nbre;
 		this.product = product;
+	}
+
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
+
+	public Admin getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
 	}
 
 	public Commentaire() {

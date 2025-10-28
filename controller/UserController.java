@@ -45,7 +45,7 @@ public class UserController {
 	    }
 	  
 		
-		 @PutMapping("All/Informations/{id_user}")
+		 @PutMapping("update/All/Informations/{id_user}")
 		    public Users AddInformations(@PathVariable("id_user") long id_user,@RequestBody Users usersRequest) throws IOException {
 		    	 Users user = userService.updateUser(id_user, usersRequest);
 		    	return user;

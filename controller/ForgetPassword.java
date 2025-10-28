@@ -131,7 +131,8 @@ public class ForgetPassword {
 		    	acc.setPsw(passwordEncoder.encode(account.getPsw()));
 		    	acc.setConfirmationpsw(passwordEncoder.encode(account.getConfirmationpsw()));
 		    	accountRepository.save(acc);
-	    		 return ResponseEntity.ok(acc);}
+	    		 return ResponseEntity.ok(acc);
+	    		 }
 	    	else {
 	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("those passwords doesn't match, try again");
 	        }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.deepinsta.modal.Account;
 import com.deepinsta.modal.Admin;
+import com.deepinsta.modal.Users;
 
 @Repository 
 public interface AccountRepository extends JpaRepository<Account, Long> {
@@ -24,6 +25,8 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 	Account  findById(@Param("id_account") long id_account);
 	@Query("FROM Account WHERE admin = :admin") 
 	Account  findByAdmin(@Param("admin") Admin admin);
+	@Query("FROM Account WHERE user = :user") 
+	Account  findByUser(@Param("user") Users user);
 
 
 }
