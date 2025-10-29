@@ -37,6 +37,9 @@
             </thead>
             <tbody>
                 @for(item of products; track item.id_product){
+                    @if( !item.is_delete){
+
+                   
                     <!-- modal discount  -->
                 @if(isModalDiscountOpen){
                 <div class="modal-overlay-delete ">
@@ -570,7 +573,7 @@
                 }
                 <!-- fin edit modal  -->
                 }
-                
+                 }
             </tbody>
         </table>
         <!-- modal delete -->

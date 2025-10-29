@@ -6,6 +6,7 @@
             @if(listAll.length>0){
             <div class="wrap center transparent">
                 @for(i of listAll; track i){
+                    @if(!i.is_delete){
                 <div class="content transparent">
                     <div class="card transparent">
                         <div class="content_card transparent">
@@ -64,6 +65,7 @@
                         </div>
                     </div>
                 </div>
+                }
                 }
             </div>
             }@else {

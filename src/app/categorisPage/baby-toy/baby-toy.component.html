@@ -11,6 +11,7 @@
             @if(listAll.length>0){
             <div class="wrap center transparent">
                 @for(i of listAll; track i){
+                    @if(!i.id_delete){                    
                 <div class="content transparent">
                     <div class="card transparent">
                         <div class="content_card transparent">
@@ -70,6 +71,7 @@
                     </div>
                 </div>
                 }
+                }
             </div>
             }@else {
             <div class="empty_content center heigth70vh column">
@@ -87,7 +89,7 @@
             @if(listAll.length>0){
             <div class="wrap center transparent">
                 @for(i of listAll; track i){
-                    @if(i.gender=="Female"){
+                    @if(i.gender=="Female" && !i.is_delete){
                         <div class="content transparent">
                     <div class="card transparent">
                         <div class="content_card transparent">
@@ -164,7 +166,7 @@
             @if(listAll.length>0){
             <div class="wrap center transparent">
                 @for(i of listAll; track i){
-                    @if(i.gender=="male"){
+                    @if(i.gender=="male" && !i.id_delete){
                         <div class="content transparent">
                     <div class="card transparent">
                         <div class="content_card transparent">

@@ -130,7 +130,7 @@
         <div class="carousel_card" abindex="1" (mousedown)="startDrag($event)" (mousemove)="onDrag($event)"
             (mouseup)="endDrag()" (mouseleave)="endDrag()">
             @for(item of allProduct;let i=$index; track item){
-            @if(item.type=="SelfCare & Product"){
+            @if(item.type=="SelfCare & Product" && !item.is_delete){
             <div class="card ">
                 <div class="content_card ">
                     <div class="img_content" >
@@ -227,7 +227,7 @@
         <div class="carousel_card" abindex="1" (mousedown)="startDrag($event)" (mousemove)="onDrag($event)"
             (mouseup)="endDrag()" (mouseleave)="endDrag()">
             @for(item of allProduct;let i=$index; track item){
-            @if(item.type=="Phone & Electronique"){
+            @if(item.type=="Phone & Electronique" && !item.is_delete){
             <div class="card">
                 <div class="content_card ">
                     <div class="img_content" >
@@ -321,7 +321,7 @@
         <div class="carousel_card" abindex="1" (mousedown)="startDrag($event)" (mousemove)="onDrag($event)"
             (mouseup)="endDrag()" (mouseleave)="endDrag()">
             @for(item of allProduct; let i=$index; track item){
-            @if(item.type=="Kitchen & Home essentials"){
+            @if(item.type=="Kitchen & Home essentials" && !item.is_delete){
             <div class="card ">
                 <div class="content_card ">
                     <div class="img_content" >
@@ -413,7 +413,7 @@
         <div class="carousel_card" abindex="1" (mousedown)="startDrag($event)" (mousemove)="onDrag($event)"
             (mouseup)="endDrag()" (mouseleave)="endDrag()">
             @for(item of allProduct;let i=$index; track item){
-            @if(item.type=="Gaming & Digitals"){
+            @if(item.type=="Gaming & Digitals" && !item.is_delete){
             <div class="card ">
                 <div class="content_card ">
                     <div class="img_content" >
@@ -505,7 +505,7 @@
         <div class="carousel_card" abindex="1" (mousedown)="startDrag($event)" (mousemove)="onDrag($event)"
             (mouseup)="endDrag()" (mouseleave)="endDrag()">
             @for(item of allProduct;let i=$index; track item){
-            @if(item.type=="Baby & Toy"){
+            @if(item.type=="Baby & Toy" && !item.is_delete){
             <div class="card ">
                 <div class="content_card ">
                     <div class="img_content" >
@@ -598,7 +598,7 @@
         <div class="carousel_card" abindex="1" (mousedown)="startDrag($event)" (mousemove)="onDrag($event)"
             (mouseup)="endDrag()" (mouseleave)="endDrag()">
             @for(item of allProduct; let i=$index; track item){
-            @if(item.type=="Sprots & Entertainement"){
+            @if(item.type=="Sprots & Entertainement" && !item.is_delete){
             <div class="card ">
                 <div class="content_card ">
                     <div class="img_content" >
@@ -689,7 +689,7 @@
         <div class="carousel_card" abindex="1" (mousedown)="startDrag($event)" (mousemove)="onDrag($event)"
             (mouseup)="endDrag()" (mouseleave)="endDrag()">
             @for(item of allProduct;let i=$index; track item){
-            @if(item.type=="Books & Education"){
+            @if(item.type=="Books & Education" && !item.is_delete){
             <div class="card ">
                 <div class="content_card ">
                     <div class="img_content" >
@@ -780,7 +780,7 @@
         <div class="carousel_card" abindex="1" (mousedown)="startDrag($event)" (mousemove)="onDrag($event)"
             (mouseup)="endDrag()" (mouseleave)="endDrag()">
             @for(item of allProduct;let i=$index; track item){
-            @if(item.type=="Car & Accessoires"){
+            @if(item.type=="Car & Accessoires" && !item.is_delete){
             <div class="card ">
                 <div class="content_card ">
                     <div class="img_content" >
@@ -870,7 +870,7 @@
         <div class="carousel_card" abindex="1" (mousedown)="startDrag($event)" (mousemove)="onDrag($event)"
             (mouseup)="endDrag()" (mouseleave)="endDrag()">
             @for(item of allProduct;let i=$index; track item){
-            @if(item.type=="Animals"){
+            @if(item.type=="Animals" && !item.is_delete){
             <div class="card ">
                 <div class="content_card ">
                     <div class="img_content" >
@@ -960,7 +960,7 @@
         <div class="carousel_card" abindex="1" (mousedown)="startDrag($event)" (mousemove)="onDrag($event)"
             (mouseup)="endDrag()" (mouseleave)="endDrag()">
             @for(item of allProduct;let i=$index; track item){
-            @if(item.type=="Magasin"){
+            @if(item.type=="Magasin" && !item.is_delete){
             <div class="card ">
                 <div class="content_card ">
                     <div class="img_content" >
