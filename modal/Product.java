@@ -47,6 +47,8 @@ public class Product {
 	int qte;
 	@Column(name="rest_qte")
 	int rest_qte;
+	@Column(name="is_delete")
+	boolean is_delete;
 	public int getRest_qte() {
 		return rest_qte;
 	}
@@ -135,6 +137,20 @@ public class Product {
 
 	public List<Color_qte> getColor_size_qte() {
 		return color_size_qte;
+	}
+
+
+
+
+	public boolean isIs_delete() {
+		return is_delete;
+	}
+
+
+
+
+	public void setIs_delete(boolean is_delete) {
+		this.is_delete = is_delete;
 	}
 
 

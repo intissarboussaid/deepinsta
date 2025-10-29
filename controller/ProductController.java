@@ -158,9 +158,9 @@ public class ProductController {
 		}
 		
 		@DeleteMapping("/delete/{id_product}")
-		public void deleteProduct(@PathVariable("id_product") long id_product) {
-			productService.deleteProduct(id_product);
-			return;
+		public Product deleteProduct(@PathVariable("id_product") long id_product) {
+			return productService.deleteProduct(id_product);
+			
 					
 		}
 		@GetMapping("remove/discount/{id_product}")

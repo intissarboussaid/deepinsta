@@ -196,10 +196,11 @@ public class ProductService {
 		
 	}
 	
-	public void deleteProduct(long id) {
+	public Product deleteProduct(long id) {
 		Product product=GetProductById(id);
-		productRepository.delete(product);
-		return ;
+		product.setIs_delete(true);
+		productRepository.save(product);
+		return product ;
 	}
 	public Product RemoveDiscount(long id_product) {
 		Product product=GetProductById(id_product) ;

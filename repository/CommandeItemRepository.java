@@ -1,6 +1,8 @@
 package com.deepinsta.repository;
 
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,5 +17,8 @@ public interface CommandeItemRepository extends JpaRepository<CommandeItem, Long
 	CommandeItem findById(@Param("id_cmditem") long id_cmditem);
 	@Query("FROM CommandeItem WHERE product = :product")
 	CommandeItem findByProduct(@Param("product") Product product);
+	
+	@Query("FROM CommandeItem WHERE product = :product")
+	List<CommandeItem> findByProducts(@Param("product") Product product);
 
 }
