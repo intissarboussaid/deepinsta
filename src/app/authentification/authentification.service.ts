@@ -6,7 +6,7 @@ import { catchError, Observable, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthentificationService {
-  private apiUrl = 'http://localhost:8080/api/deepinsta/auth';
+  private apiUrl = 'http://https://deepshop-backend-1.onrender.com/api/deepinsta/auth';
   constructor(private http: HttpClient) { }
   // login(credentials: { email: string; password: string }): Observable<any> {
   //   return this.http.post(`${this.apiUrl}/authenticate`, credentials).pipe(
@@ -17,7 +17,7 @@ export class AuthentificationService {
   //   );
   // }
   // login(credentials: { email: string; password: string }): Observable<any> {
-  //   return this.http.post('http://localhost:8080/api/deepinsta/auth/authenticate', credentials).pipe(
+  //   return this.http.post('http://https://deepshop-backend-1.onrender.com/api/deepinsta/auth/authenticate', credentials).pipe(
   //     catchError(err => {
   //       console.error('Login API error:', err);
   //       return throwError(() => err);
@@ -40,13 +40,13 @@ export class AuthentificationService {
     return this.http.get(`${this.apiUrl}/activate/account/${id}`);
   }
   sendEmailRP(email: string): Observable<any> {
-    return this.http.post(`http://localhost:8080/api/deepinsta/forgetPassword/request-reset/${email}`, { email });
+    return this.http.post(`http://https://deepshop-backend-1.onrender.com/api/deepinsta/forgetPassword/request-reset/${email}`, { email });
   }
   verificationCode(email: any, credentials: { code: any }): Observable<any> {
-    return this.http.post(`http://localhost:8080/api/deepinsta/forgetPassword/verify-code/${email}`, credentials);
+    return this.http.post(`http://https://deepshop-backend-1.onrender.com/api/deepinsta/forgetPassword/verify-code/${email}`, credentials);
   }
   restPassword(email: any,  psw: string, confirmationpsw: string ): Observable<any> {
-    return this.http.put(`http://localhost:8080/api/deepinsta/forgetPassword/rest/Password/${email}`, { psw,confirmationpsw });
+    return this.http.put(`http://https://deepshop-backend-1.onrender.com/api/deepinsta/forgetPassword/rest/Password/${email}`, { psw,confirmationpsw });
   }
   logout(): void {
     localStorage.removeItem('access_token');

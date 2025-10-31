@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FavoriteService {
-  private apiUrl = 'http://localhost:8080/api/deepshop/fav/';
+  private apiUrl = 'http://https://deepshop-backend-1.onrender.com/api/deepshop/fav/';
 
   constructor(private http: HttpClient) { }
 

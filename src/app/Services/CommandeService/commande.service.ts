@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CommandeService {
-  private apiUrl = 'http://localhost:8080/api/deepinsta/commande/';
+  private apiUrl = 'http://https://deepshop-backend-1.onrender.com/api/deepinsta/commande/';
 
   constructor(private http: HttpClient) { }
 

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class RatingService {
 
-  private apiUrl = 'http://localhost:8080/api/deepinsta/rating/';
+  private apiUrl = 'http://https://deepshop-backend-1.onrender.com/api/deepinsta/rating/';
 
   constructor(private http: HttpClient) { }
 

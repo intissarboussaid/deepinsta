@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PhotoService {
-  private apiUrl = 'http://localhost:8080/api/deepinsta/photo';
+  private apiUrl = 'http://https://deepshop-backend-1.onrender.com/api/deepinsta/photo';
   constructor(private http: HttpClient) { }
 
   getPhotos(id: any) {

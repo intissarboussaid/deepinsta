@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ContactService {
-  private apiUrl = 'http://localhost:8080/api/deepshop/contact';
+  private apiUrl = 'http://https://deepshop-backend-1.onrender.com/api/deepshop/contact';
 
   constructor( private http: HttpClient) { }
   

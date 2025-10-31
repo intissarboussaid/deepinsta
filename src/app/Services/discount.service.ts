@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class DiscountService {
 
-    private apiUrl = 'http://localhost:8080/api/deepinsta/discount/';
+    private apiUrl = 'http://https://deepshop-backend-1.onrender.com/api/deepinsta/discount/';
 
   constructor(private http: HttpClient) { }
   AddDiscount(id: any,discount:any): Observable<any> {

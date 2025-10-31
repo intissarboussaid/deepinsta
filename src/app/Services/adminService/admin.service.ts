@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AdminService {
-private apiUrl = 'http://localhost:8080/api/deepinsta/admin';
+private apiUrl = 'http://https://deepshop-backend-1.onrender.com/api/deepinsta/admin';
   constructor(private http: HttpClient) { }
 
  updateInformations(id: any,  adminBody:{nom:any,prenom:any,phone:any,adresse:any,local:any,date_naissance:any,site:any,sexe:any,nationnalité:any,instagramme:any,facebook:any,tiktok:any,description:any}): Observable<any> {
-    return this.http.put(`http://localhost:8080/api/deepinsta/admin/update/Informations/${id}`,adminBody);
+    return this.http.put(`http://https://deepshop-backend-1.onrender.com/api/deepinsta/admin/update/Informations/${id}`,adminBody);
   }
   getAdmin(id: any): Observable<any> {
     return this.http.get(`${this.apiUrl}/${id}`);

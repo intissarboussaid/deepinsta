@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CodePromoService {
 
-    private apiUrl = 'http://localhost:8080/api/deepshop/codePromo/';
+    private apiUrl = 'http://https://deepshop-backend-1.onrender.com/api/deepshop/codePromo/';
   constructor(private http: HttpClient) { }
 
   addCodePromo(idAdmin:any,idUser:any,CodePromo:any): Observable<any> {

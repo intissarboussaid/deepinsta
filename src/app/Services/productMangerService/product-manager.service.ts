@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ProductManagerService {
 
-  private apiUrl = 'http://localhost:8080/api/deepinsta/product_manager/';
+  private apiUrl = 'http://https://deepshop-backend-1.onrender.com/api/deepinsta/product_manager/';
   constructor(private http: HttpClient) { }
 
  updateInformations(id: any,  adminBody:{nom:any,prenom:any,phone:any,adresse:any,local:any,date_naissance:any,site:any,sexe:any,nationnalité:any,instagramme:any,facebook:any,tiktok:any,description:any}): Observable<any> {

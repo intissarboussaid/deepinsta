@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:8080/api/deepinsta/product/';
-  private urlView='http://localhost:8080/api/deepinsta/view/product/'
+  private apiUrl = 'http://https://deepshop-backend-1.onrender.com/api/deepinsta/product/';
+  private urlView='http://https://deepshop-backend-1.onrender.com/api/deepinsta/view/product/'
 
   constructor(private http: HttpClient) { }
   AddProduct(id: any, product: any, files: File[]): Observable<any> {
